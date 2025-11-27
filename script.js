@@ -18,29 +18,41 @@ function getComputerChoice() {
 
 // Function for getting the human choice, and make it case insensitive so we can compare them easily
 function getHumanChoice() {
-    return prompt("Enter a choice:").toLowerCase();
+    return prompt("Enter a choice: (rock, paper, or maybe scissors)").toLowerCase();
 }
 
 //Function for playing 1 round and printing the results 
 function playRound(humanChoice, computerChoice) {
 
     if(humanChoice === computerChoice) {
-        humanScore++;
-        computerScore++;
-        alert(`Equality -> The score is ${humanScore}:${computerScore}`)
+        alert(`Equality    | The score is ${humanScore} : ${computerScore} |`)
     } else if(
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        alert(`You win! ${humanChoice} beats ${computerChoice} -> The score is ${humanScore}:${computerScore}`);
+        alert(` Your -> ${humanChoice} beats Computer -> ${computerChoice}    | The score is ${humanScore} : ${computerScore} |`);
     }
     else {
         computerScore++;
-        alert(`You lose! ${computerChoice} beats ${humanChoice} -> The score is ${humanScore}:${computerScore}`);
+        alert(` Computers -> ${computerChoice} beats Your -> ${humanChoice}    | The score is ${humanScore} : ${computerScore} |`);
     }
 }
+
+function playGame() {
+
+    let counterRounds = 0;
+
+    while(counterRounds !== 5) {
+        playRound(getHumanChoice(), getComputerChoice());
+        counterRounds++;
+    }
+
+    alert (humanScore > computerScore ? `Congratulation You Won! with the score of | ${humanScore} : ${computerScore} |` : `Unfortunately you lost! with the score of -> | ${humanScore} : ${computerScore} |`);
+}
+
+playGame();
 
 
 
