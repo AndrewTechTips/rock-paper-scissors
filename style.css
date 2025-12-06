@@ -108,8 +108,56 @@ body {
     border: 4px solid #ff9f43;
 }
 
-.results {
-    margin-top: 20px;
-    
+/*Create an initial class for the initial message that will be displayed at the first glance before we start the game
+Afterwards we delete that class using js, and this style will be no longer available
+*/
+.result.initial {
+    color: #48dbfb;
+    font-size: 20px;
+    letter-spacing: 2px;
 }
 
+.results {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #252525;
+    border-radius: 10px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+}
+
+.result {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.message {
+    font-size: 14px;
+    color: #cccccc;
+    font-style: italic;
+}
+
+/*As same as the initial result, we make separate styles for win tie or lose
+Therefore we add them using js
+*/
+
+.text-win {
+    color: #2ecc71;
+    text-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+}
+
+.text-lose {
+    color: #e74c3c; 
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+.text-draw {
+    color: #f1c40f;
+}
