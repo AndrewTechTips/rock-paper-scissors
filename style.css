@@ -161,3 +161,26 @@ Therefore we add them using js
 .text-draw {
     color: #f1c40f;
 }
+
+/*We create the class hidden to hide the button and show it after the round ends*/
+.hidden {
+    display: none;
+}
+
+.reset-btn {
+    margin-top: 25px;
+    padding: 12px 30px;
+    width: auto;
+    align-self: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #ffd700;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+

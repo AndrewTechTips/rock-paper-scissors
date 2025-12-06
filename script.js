@@ -74,6 +74,11 @@ function checkWinner() {
     }
 }
 
+const resetBtn = document.querySelector("#resetBtn");
+
+//When the reset button is pressed, the page is reloaded, using the window location reload method
+resetBtn.addEventListener("click", () => window.location.reload());
+
 /*We can create a function, for ending the game, that will display separe color for text
 Based on win or lose, and will remove the classes style that were used for win and lose
 */ 
@@ -85,7 +90,10 @@ function endGame(finalMessage, colorClass) {
     message.textContent = finalMessage;
     message.setAttribute("style", "font-size: 18px", "font-weight: bold");
     message.style.color = colorClass === "text-win" ? "#2ecc71" : "#e74c3c";
+    
     disableButtons();
+
+    resetBtn.classList.remove("hidden");
 }
 
 //For the final we can make a function, that disables the buttons, 
