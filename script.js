@@ -1,6 +1,11 @@
-let humanScore = 0;
-let computerScore = 0;
+let scoreHuman = 0;
+let scoreComputer = 0;
 
+let playerScore = document.querySelector(".playerScore");
+let computerScore = document.querySelector(".computerScore");
+let choices = document.querySelector(".choices");
+let result = document.querySelector(".result");
+let message = document.querySelector(".message");
 
 // Function for getting the random computer result
 function getComputerChoice() {
@@ -16,43 +21,63 @@ function getComputerChoice() {
     }
 }
 
-// Function for getting the human choice, and make it case insensitive so we can compare them easily
-function getHumanChoice() {
-    return prompt("Enter a choice: (rock, paper, or maybe scissors)").toLowerCase();
-}
+choices.addEventListener("click", (event) => {
+
+    let playerSelection = event.target.id;
+
+    if(playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
+        playRound(playerSelection, getComputerChoice());
+        checkWinner();
+    }
+} );
 
 //Function for playing 1 round and printing the results 
 function playRound(humanChoice, computerChoice) {
 
     if(humanChoice === computerChoice) {
-        alert(`Equality    | The score is ${humanScore} : ${computerScore} |`)
+        result.textContent = `Equal! Both chose ${humanChoice}`;
+        message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
+
     } else if(
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
-        humanScore++;
-        alert(` Your -> ${humanChoice} beats Computer -> ${computerChoice}    | The score is ${humanScore} : ${computerScore} |`);
+        scoreHuman++;
+        playerScore.textContent = scoreHuman;
+        result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+        message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
     }
     else {
-        computerScore++;
-        alert(` Computers -> ${computerChoice} beats Your -> ${humanChoice}    | The score is ${humanScore} : ${computerScore} |`);
+        scoreComputer++;
+        computerScore.textContent = scoreComputer;
+        result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+        message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
+
     }
 }
 
-function playGame() {
-
-    let counterRounds = 0;
-
-    while(counterRounds !== 5) {
-        playRound(getHumanChoice(), getComputerChoice());
-        counterRounds++;
+function checkWinner() {
+    if(scoreHuman === 5) {
+        message.textContent = "CONGRATULATIONS! You won the game!";
+        disableButtons();
+    } else if(scoreComputer === 5) {
+        message.textContent = "GAME OVER! The computer won.";
+        disableButtons();
     }
-
-    alert (humanScore > computerScore ? `Congratulation You Won! with the score of | ${humanScore} : ${computerScore} |` : `Unfortunately you lost! with the score of -> | ${humanScore} : ${computerScore} |`);
 }
 
-playGame();
+//For the final we can make a function, that disables the buttons, 
+//To do this, we can mannange the button.disabled = true; property 
+//Using a forEach for all buttons
+
+function disableButtons() {
+    const allButtons = document.querySelectorAll(".btn");
+
+    allButtons.forEach( button => 
+        button.disabled = true 
+    );
+}
 
 
 
