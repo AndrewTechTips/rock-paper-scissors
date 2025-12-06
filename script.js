@@ -34,9 +34,13 @@ choices.addEventListener("click", (event) => {
 //Function for playing 1 round and printing the results 
 function playRound(humanChoice, computerChoice) {
 
+    //As we see in  css , with this we can remove or add style for separate reasons
+    result.classList.remove("text-win", "text-lose", "text-draw");
+
     if(humanChoice === computerChoice) {
-        result.textContent = `Equal! Both chose ${humanChoice}`;
-        message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
+        result.textContent = "It's a Draw";
+        message.textContent = `You both chose ${humanChoice}`;
+        result.classList.add("text-draw");
 
     } else if(
         (humanChoice === "rock" && computerChoice === "scissors") ||
@@ -45,26 +49,43 @@ function playRound(humanChoice, computerChoice) {
     ) {
         scoreHuman++;
         playerScore.textContent = scoreHuman;
+
         result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
+        
+        result.classList.add("text-win");
     }
     else {
         scoreComputer++;
         computerScore.textContent = scoreComputer;
+      
         result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
         message.textContent = `You chose ${humanChoice}, Computer chose ${computerChoice}`;
 
+        result.classList.add("text-lose");
     }
 }
 
 function checkWinner() {
     if(scoreHuman === 5) {
-        message.textContent = "CONGRATULATIONS! You won the game!";
-        disableButtons();
+        endGame("CONGRATULATIONS! 🏆", "text-win")
     } else if(scoreComputer === 5) {
-        message.textContent = "GAME OVER! The computer won.";
-        disableButtons();
+        endGame("GAME OVER! 🤖", "text-lose");
     }
+}
+
+/*We can create a function, for ending the game, that will display separe color for text
+Based on win or lose, and will remove the classes style that were used for win and lose
+*/ 
+function endGame(finalMessage, colorClass) {
+
+    result.textContent = "Game Complete";
+    result.className = "result";
+
+    message.textContent = finalMessage;
+    message.setAttribute("style", "font-size: 18px", "font-weight: bold");
+    message.style.color = colorClass === "text-win" ? "#2ecc71" : "#e74c3c";
+    disableButtons();
 }
 
 //For the final we can make a function, that disables the buttons, 
